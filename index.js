@@ -1,5 +1,11 @@
 const http = require('http');
 const routes = require('patterns')();
+const SpotifyWebApi = require('spotify-web-api-node');
+
+const spotifyApi = new SpotifyWebApi({
+	clientId : '6c926cf5c6cd4f2ead716ce1b20d9ef7',
+	clientSecret : '36a13c94552449a79f856abfeabc0455',
+});
 
 routes.add('GET /', (req, res, params) => {
 	res.end('hello world');
