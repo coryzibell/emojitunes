@@ -1,0 +1,14 @@
+{
+	"name": "emojitunes",
+	"version": "0.0.0",
+	"description": "Accept emojis return musical recommendations",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js"
+	},
+	"author": "Adam Chambers",
+	"license": "MIT",
+	"dependencies": {
+		"patterns": "^1.0.2"
+	}
+}
