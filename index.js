@@ -1,6 +1,9 @@
 const http = require('http');
 const routes = require('patterns')();
 const SpotifyWebApi = require('spotify-web-api-node');
+const _ = {
+	forOwn: require('lodash/forOwn'),
+};
 
 const spotifyApi = new SpotifyWebApi({
 	clientId: '6c926cf5c6cd4f2ead716ce1b20d9ef7',
@@ -107,7 +110,9 @@ const genres = {
 	'reggae': [],
 	'reggaeton': [],
 	'road-trip': [],
-	'rock': [],
+	'rock': [
+		'🤘',
+	],
 	'rock-n-roll': [],
 	'rockabilly': [],
 	'romance': [],
@@ -143,9 +148,29 @@ spotifyApi.clientCredentialsGrant().then(data => {
 });
 
 routes.add('GET /recommendations/{emoji}', (req, res) => {
-	console.log(decodeURI(req.params));
 	res.setHeader('content-type', 'text/html');
-	res.end(JSON.stringify(req.params.emoji));
+
+	const emoji = decodeURIComponent(req.params.emoji);
+	let foundGenre = '';
+
+	_.forOwn(genres, (emojis, genre) => {
+		console.log(genre);
+		emojis.every(g => {
+			console.log(g);
+			if (g === emoji) {
+				foundGenre = genre;
+				return false;
+			}
+
+			return true;
+		});
+
+		if (foundGenre) {
+			return false;
+		}
+	});
+
+	res.end(foundGenre);
 });
 
 const server = http.createServer((req, res) => {
