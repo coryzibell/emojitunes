@@ -39,7 +39,9 @@ const genres = {
 	'detroit-techno': [],
 	'disco': [],
 	'disney': [],
-	'drum-and-bass': [],
+	'drum-and-bass': [
+		'🤘',
+	],
 	'dub': [],
 	'dubstep': [],
 	'edm': [],
@@ -75,7 +77,9 @@ const genres = {
 	'iranian': [],
 	'j-dance': [],
 	'j-idol': [],
-	'j-pop': [],
+	'j-pop': [
+
+	],
 	'j-rock': [],
 	'jazz': [],
 	'k-pop': [],
@@ -84,7 +88,8 @@ const genres = {
 	'latino': [],
 	'malay': [],
 	'mandopop': [],
-	'metal': [],
+	'metal': [
+	],
 	'metal-misc': [],
 	'metalcore': [],
 	'minimal-techno': [],
@@ -134,7 +139,9 @@ const genres = {
 	'synth-pop': [],
 	'tango': [],
 	'techno': [],
-	'trance': [],
+	'trance': [
+		'🙌',
+	],
 	'trip-hop': [],
 	'turkish': [],
 	'work-out': [],
@@ -151,31 +158,29 @@ routes.add('GET /recommendations/{emoji}', (req, res) => {
 	res.setHeader('content-type', 'text/html');
 
 	const emoji = decodeURIComponent(req.params.emoji);
-	let foundGenre = '';
+	const foundGenres = [];
 
 	_.forOwn(genres, (emojis, genre) => {
 		console.log(genre);
 		emojis.every(g => {
 			console.log(g);
 			if (g === emoji) {
-				foundGenre = genre;
+				foundGenres.push(genre);
 				return false;
 			}
 
 			return true;
 		});
-
-		if (foundGenre) {
-			return false;
-		}
 	});
 
-	if (!foundGenre) {
+	console.log(foundGenres);
+
+	if (!foundGenres.length) {
 		res.end('Nothing found 😞');
 	}
 
 	spotifyApi.getRecommendations({
-		seed_genres: foundGenre,
+		seed_genres: foundGenres,
 		min_popularity: 50,
 	}).then(data => {
 		const output = [];
