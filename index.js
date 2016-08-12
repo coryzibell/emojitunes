@@ -3,6 +3,7 @@ const routes = require('patterns')();
 const SpotifyWebApi = require('spotify-web-api-node');
 const _ = {
 	forOwn: require('lodash/forOwn'),
+	shuffle: require('lodash/shuffle'),
 };
 
 const spotifyApi = new SpotifyWebApi({
@@ -17,13 +18,19 @@ const genres = {
 	'alternative': [],
 	'ambient': [],
 	'anime': [],
-	'black-metal': [],
+	'black-metal': [
+		'🤘',
+	],
 	'bluegrass': [],
 	'blues': [],
 	'bossanova': [],
-	'brazil': [],
+	'brazil': [
+		'🇧🇷',
+	],
 	'breakbeat': [],
-	'british': [],
+	'british': [
+		'🇬🇧',
+	],
 	'cantopop': [],
 	'chicago-house': [],
 	'children': [],
@@ -34,65 +41,108 @@ const genres = {
 	'country': [],
 	'dance': [],
 	'dancehall': [],
-	'death-metal': [],
-	'deep-house': [],
+	'death-metal': [
+		'🤘',
+	],
+	'deep-house': [
+		'🙌',
+	],
 	'detroit-techno': [],
 	'disco': [],
 	'disney': [],
 	'drum-and-bass': [
-		'🤘',
+		'🙌',
 	],
 	'dub': [],
-	'dubstep': [],
-	'edm': [],
+	'dubstep': [
+		'🙌',
+	],
+	'edm': [
+		'🙌',
+	],
 	'electro': [],
-	'electronic': [],
+	'electronic': [
+		'🙌',
+	],
 	'emo': [],
 	'folk': [],
 	'forro': [],
-	'french': [],
+	'french': [
+		'🇫🇷',
+	],
 	'funk': [],
 	'garage': [],
-	'german': [],
+	'german': [
+		'🇩🇪',
+	],
 	'gospel': [],
 	'goth': [],
-	'grindcore': [],
+	'grindcore': [
+		'🤘',
+	],
 	'groove': [],
 	'grunge': [],
 	'guitar': [],
 	'happy': [],
-	'hard-rock': [],
-	'hardcore': [],
+	'hard-rock': [
+		'🤘',
+	],
+	'hardcore': [
+		'🤘',
+	],
 	'hardstyle': [],
-	'heavy-metal': [],
+	'heavy-metal': [
+		'🤘',
+	],
 	'hip-hop': [],
 	'holidays': [],
 	'honky-tonk': [],
-	'house': [],
-	'idm': [],
-	'indian': [],
+	'house': [
+		'🙌',
+	],
+	'idm': [
+		'🤓',
+	],
+	'indian': [
+		'🇮🇳',
+	],
 	'indie': [],
 	'indie-pop': [],
 	'industrial': [],
 	'iranian': [],
-	'j-dance': [],
-	'j-idol': [],
-	'j-pop': [
-
+	'j-dance': [
+		'🇯🇵',
 	],
-	'j-rock': [],
+	'j-idol': [
+		'🇯🇵',
+	],
+	'j-pop': [
+		'🇯🇵',
+	],
+	'j-rock': [
+		'🇯🇵',
+	],
 	'jazz': [],
-	'k-pop': [],
+	'k-pop': [
+		'🇰🇷',
+	],
 	'kids': [],
 	'latin': [],
 	'latino': [],
 	'malay': [],
 	'mandopop': [],
 	'metal': [
+		'🤘',
 	],
-	'metal-misc': [],
-	'metalcore': [],
-	'minimal-techno': [],
+	'metal-misc': [
+		'🤘',
+	],
+	'metalcore': [
+		'🤘',
+	],
+	'minimal-techno': [
+		'🙌',
+	],
 	'movies': [],
 	'mpb': [],
 	'new-age': [],
@@ -132,20 +182,30 @@ const genres = {
 	'songwriter': [],
 	'soul': [],
 	'soundtracks': [],
-	'spanish': [],
+	'spanish': [
+		'🇪🇸',
+	],
 	'study': [],
 	'summer': [],
-	'swedish': [],
+	'swedish': [
+		'🇸🇪',
+	],
 	'synth-pop': [],
 	'tango': [],
-	'techno': [],
+	'techno': [
+		'🙌',
+	],
 	'trance': [
 		'🙌',
 	],
 	'trip-hop': [],
-	'turkish': [],
+	'turkish': [
+		'🇹🇷',
+	],
 	'work-out': [],
-	'world-music': [],
+	'world-music': [
+		'🌏',
+	],
 };
 
 spotifyApi.clientCredentialsGrant().then(data => {
@@ -180,7 +240,7 @@ routes.add('GET /recommendations/{emoji}', (req, res) => {
 	}
 
 	spotifyApi.getRecommendations({
-		seed_genres: foundGenres,
+		seed_genres: _.shuffle(foundGenres).slice(0, 4),
 		min_popularity: 50,
 	}).then(data => {
 		const output = [];
