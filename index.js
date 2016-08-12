@@ -170,7 +170,28 @@ routes.add('GET /recommendations/{emoji}', (req, res) => {
 		}
 	});
 
-	res.end(foundGenre);
+	if (!foundGenre) {
+		res.end('Nothing found 😞');
+	}
+
+	spotifyApi.getRecommendations({
+		seed_genres: foundGenre,
+		min_popularity: 50,
+	}).then(data => {
+		const output = [];
+
+		data.body.tracks.forEach(track => {
+			output.push({
+				artist: track.artists[0].name,
+				title: track.name,
+			});
+		});
+
+		res.end(JSON.stringify(output));
+	}, error => {
+		console.log(error);
+		res.end('There was an error');
+	});
 });
 
 const server = http.createServer((req, res) => {
