@@ -142,13 +142,10 @@ spotifyApi.clientCredentialsGrant().then(data => {
 	console.log('Something went wrong when retrieving an access token', err);
 });
 
-routes.add('GET /', (req, res) => {
-	spotifyApi.getAvailableGenreSeeds().then(data => {
-		console.log('here');
-		data.body.genres.forEach(genre => console.log(genre));
-	});
-
-	res.end('hello world');
+routes.add('GET /recommendations/{emoji}', (req, res) => {
+	console.log(decodeURI(req.params));
+	res.setHeader('content-type', 'text/html');
+	res.end(JSON.stringify(req.params.emoji));
 });
 
 const server = http.createServer((req, res) => {
@@ -162,6 +159,6 @@ const server = http.createServer((req, res) => {
 });
 
 // listen for http request on port 9090
-server.listen(6969, () => {
-	console.log('Server is running on http://localhost:6969');
+server.listen(9000, () => {
+	console.log('Server is running on http://localhost:9000');
 });
