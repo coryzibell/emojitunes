@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js"
   },
-  "author": "Adam Chambers",
+  "author": "Adam Chambers, @chambaz",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^2.13.1",
