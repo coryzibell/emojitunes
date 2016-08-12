@@ -19,11 +19,16 @@ spotifyApi.clientCredentialsGrant().then(data => {
 	console.log('Something went wrong when retrieving an access token', err);
 });
 
-// routes.add('GET /recommendations/{emoji}', (req, res) => {
-//
-// });
+routes.add('GET /recommendations/{emoji}', (req, res) => {
+	res.setHeader('Content-Type', 'application/json');
+	getRecommendations(req).then(
+		recommendations => res.end(JSON.stringify(recommendations)),
+		error => res.end(JSON.stringify(error))
+	);
+});
 
 routes.add('GET /recommendations-browser/{emoji}', (req, res) => {
+	res.setHeader('Content-Type', 'text/html');
 	getRecommendations(req).then(recommendations => {
 		if (!recommendations.tracks && recommendations.tracks.length) {
 			res.end('Nothing found 😞');
