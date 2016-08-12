@@ -19,49 +19,22 @@ spotifyApi.clientCredentialsGrant().then(data => {
 	console.log('Something went wrong when retrieving an access token', err);
 });
 
-routes.add('GET /recommendations/{emoji}', (req, res) => {
-	res.setHeader('content-type', 'text/html');
+// routes.add('GET /recommendations/{emoji}', (req, res) => {
+//
+// });
 
-	const emoji = decodeURIComponent(req.params.emoji);
-	const foundGenres = [];
+routes.add('GET /recommendations-browser/{emoji}', (req, res) => {
+	getRecommendations(req).then(recommendations => {
+		if (!recommendations.tracks && recommendations.tracks.length) {
+			res.end('Nothing found 😞');
+			return;
+		}
 
-	_.forOwn(genres, (emojis, genre) => {
-		console.log(genre);
-		emojis.every(g => {
-			console.log(g);
-			if (g === emoji) {
-				foundGenres.push(genre);
-				return false;
-			}
-
-			return true;
-		});
-	});
-
-	const shuffledFoundGenres = _.shuffle(foundGenres).slice(0, 4);
-
-	console.log(shuffledFoundGenres);
-
-	if (!foundGenres.length) {
-		res.end('Nothing found 😞');
-	}
-
-	spotifyApi.getRecommendations({
-		seed_genres: shuffledFoundGenres,
-		min_popularity: 50,
-	}).then(data => {
-		// res.end(JSON.stringify(data));
-		// return;
 		const output = [];
 
-		data.body.tracks.forEach(track => {
-			// output.push({
-			// 	artist: track.artists[0].name,
-			// 	title: track.name,
-			// });
-
+		recommendations.tracks.forEach(track => {
 			output.push(`
-				<iframe src="https://embed.spotify.com/?uri=${track.external_urls.spotify}"
+				<iframe src="https://embed.spotify.com/?uri=${track.url}"
 						width="300"
 						height="380
 						frameborder="0"
@@ -71,16 +44,15 @@ routes.add('GET /recommendations/{emoji}', (req, res) => {
 			`);
 		});
 
-		// res.end(JSON.stringify(output));
 		res.end(`
-			<h1 style="text-align: center; text-transform: capitalize;">${shuffledFoundGenres.join(', ')}</h1>
+			<h1 style="text-align: center; text-transform: capitalize;">${recommendations.genres.join(', ')}</h1>
 			<div style="width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap;">
 				${output.join('<br />')}
 			</div>
 		`);
 	}, error => {
 		console.log(error);
-		res.end('There was an error');
+		res.end('There was an error 😢');
 	});
 });
 
@@ -98,3 +70,51 @@ const server = http.createServer((req, res) => {
 server.listen(9000, () => {
 	console.log('Server is running on http://localhost:9000');
 });
+
+function getRecommendations(req) {
+	const emoji = decodeURIComponent(req.params.emoji);
+	const foundGenres = [];
+
+	_.forOwn(genres, (emojis, genre) => {
+		emojis.every(g => {
+			if (g === emoji) {
+				foundGenres.push(genre);
+				return false;
+			}
+
+			return true;
+		});
+	});
+
+	const shuffledFoundGenres = _.shuffle(foundGenres).slice(0, 4);
+
+	console.log(shuffledFoundGenres);
+
+	if (!foundGenres.length) {
+		return false;
+	}
+
+	return new Promise((resolve, reject) => {
+		spotifyApi.getRecommendations({
+			seed_genres: shuffledFoundGenres,
+			min_popularity: 50,
+		}).then(data => {
+			const tracks = [];
+
+			data.body.tracks.forEach(track => {
+				tracks.push({
+					artist: track.artists[0].name,
+					title: track.name,
+					url: track.external_urls.spotify,
+				});
+			});
+
+			resolve({
+				genres: shuffledFoundGenres,
+				tracks,
+			});
+		}, error => {
+			reject(error);
+		});
+	});
+}
