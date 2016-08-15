@@ -9,6 +9,8 @@ const spotifyApi = new SpotifyWebApi({
 	clientSecret: '36a13c94552449a79f856abfeabc0455',
 });
 
+const emoji = require('node-emoji');
+
 // lodash helper functions
 const _ = {
 	forOwn: require('lodash/forOwn'),
@@ -31,7 +33,24 @@ spotifyApi.clientCredentialsGrant().then(data => {
 // @return JSON object containing genre and track arrays
 routes.add('GET /recommendations/{emoji}', (req, res) => {
 	res.setHeader('Content-Type', 'application/json');
-	getRecommendations(decodeURIComponent(req.params.emoji)).then(
+
+	const decodedEmojiParam = decodeURIComponent(req.params.emoji);
+	let foundEmoji = false;
+
+	// param is actual emoji e.g 🤘
+	if (emoji.which(decodedEmojiParam)) {
+		foundEmoji = decodedEmojiParam;
+
+	// param is txt emoji e.g :the_horns:
+	} else if (emoji.which(emoji.get(decodedEmojiParam))) {
+		foundEmoji = emoji.get(decodedEmojiParam);
+	} else {
+		res.end(JSON.stringify({
+			error: 'Emoji not supported',
+		}));
+	}
+
+	getRecommendations(foundEmoji).then(
 		recommendations => res.end(JSON.stringify(recommendations)),
 		error => res.end(JSON.stringify(error))
 	);
@@ -40,7 +59,22 @@ routes.add('GET /recommendations/{emoji}', (req, res) => {
 // get recommendations and return grid of Spotify play button iframes
 routes.add('GET /recommendations-browser/{emoji}', (req, res) => {
 	res.setHeader('Content-Type', 'text/html');
-	getRecommendations(decodeURIComponent(req.params.emoji)).then(recommendations => {
+
+	const decodedEmojiParam = decodeURIComponent(req.params.emoji);
+	let foundEmoji = false;
+
+	// param is actual emoji e.g 🤘
+	if (emoji.which(decodedEmojiParam)) {
+		foundEmoji = decodedEmojiParam;
+
+	// param is txt emoji e.g :the_horns:
+	} else if (emoji.which(emoji.get(decodedEmojiParam))) {
+		foundEmoji = emoji.get(decodedEmojiParam);
+	} else {
+		res.end('Emoji not supported');
+	}
+
+	getRecommendations(foundEmoji).then(recommendations => {
 		// no tracks found
 		if (!recommendations.tracks.length) {
 			res.end('Nothing found 😞');
