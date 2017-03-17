@@ -1,4 +1,4 @@
-😎 EmojiTunes 😎
+# 😎 EmojiTunes 😎
 
 Get Spotify recommendations from emojis.
 
