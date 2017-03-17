@@ -53,6 +53,10 @@ export default {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
         loader: `file-loader?name=${config.paths.publicPath}fonts/[name].[ext]`,
         include: path.join(__dirname, `${config.paths.publicPath}fonts`)
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   },
