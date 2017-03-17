@@ -11,12 +11,12 @@
     "keyword-spacing": ["error", {
       "before": true,
       "after": true
-    }],
+      }],
     "comma-dangle": ["off"],
     "no-console": 0
   },
   "env": {
-    "browser": true,
-    "node": true
+      "browser": true,
+      "node": true
   }
 }
