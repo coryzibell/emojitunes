@@ -1,9 +1,15 @@
-🤘 EmojiTunes 🤘
-================
+😎 EmojiTunes 😎
 
-Accept emojis and return Spotify recommendations
+Get Spotify recommendations from emojis.
 
 **Installation**
 
-	$ npm install
-	$ node start
+```
+$ npm install
+
+# start API
+$ npm run api
+
+# start client
+$ npm run dev
+```

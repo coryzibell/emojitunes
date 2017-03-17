@@ -1,7 +1,7 @@
 {
   "name": "emojitunes",
   "version": "0.0.0",
-  "description": "Accept emojis and return Spotify recommendations",
+  "description": "Get Spotify recommendations from emojis",
   "main": "index.js",
   "scripts": {
     "api": "node index.js",
