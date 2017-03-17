@@ -1,5 +1,14 @@
-.Header {
-  background: $black;
-  color: $white;
-  padding: 1.25em;
+.Header__title {
+  align-items: center;
+  display: flex;
+  font-weight: bold;
+  justify-content: center;
+  margin: 0;
+}
+
+.Header__emoji {
+  display: inline-block;
+  margin-right: 10px;
+  position: relative;
+  transform: translateY(5px);
 }
