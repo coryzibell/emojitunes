@@ -52,6 +52,21 @@ export default class Search {
   }
 
   showRecommendations(tracks) {
-    console.log(tracks)
+    this.container.innerHTML = ''
+    tracks.forEach(track => {
+      const trackContainer = document.createElement('div')
+      trackContainer.style.display = 'inline'
+      const iframe = `
+        <iframe src="https://embed.spotify.com/?uri=${track.url}"
+            width="300"
+            height="380
+            frameborder="0"
+            style="border: 0;"
+            allowtransparency="true">
+        </iframe>
+      `
+      trackContainer.innerHTML = iframe
+      this.container.appendChild(trackContainer)
+    })
   }
 }
