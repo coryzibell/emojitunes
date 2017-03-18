@@ -39,9 +39,19 @@ export default class Search {
   getRecommendations(emoji) {
     console.log(emoji)
     request
-     .get(`http://localhost:9000/recommendations/${emoji}`)
-     .end(function(err, res){
-       console.log(res)
-     })
+      .get(`http://localhost:9000/recommendations/${emoji}`)
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        if (err) {
+          console.log('Error getting recommendations', err)
+          return
+        }
+
+        this.showRecommendations(JSON.parse(res.text).tracks)
+      })
+  }
+
+  showRecommendations(tracks) {
+    console.log(tracks)
   }
 }
