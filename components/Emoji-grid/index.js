@@ -20,6 +20,7 @@ export default class Search {
     child.classList.add('Emoji-grid__item')
     child.setAttribute('data-emoji', emojiName)
     child.innerHTML = emojiCode
+    child.addEventListener('click', e => this.getRecommendations(e.currentTarget.innerHTML))
 
     this.list.appendChild(child)
   }
@@ -32,5 +33,9 @@ export default class Search {
         item.classList.remove('Emoji-grid__item--hide')
       }
     })
+  }
+
+  getRecommendations(emoji) {
+    console.log(emoji)
   }
 }
