@@ -4,4 +4,8 @@ import 'babel-polyfill'
 // Components
 // ==========================================================================
 import EmojiGrid from '../components/Emoji-grid'
-console.log(EmojiGrid)
+
+new EmojiGrid({
+  container: '[data-emoji-grid]',
+  search: '[data-search]'
+})

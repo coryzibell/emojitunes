@@ -3,6 +3,36 @@
   width: 100%;
 }
 
+.Emoji-grid__form {
+  margin: 1em 0;
+  width: 100%;
+}
+
+.Emoji-grid__search {
+  border: solid 1px $gray-light;
+  color: $black;
+  font-size: 2em;
+  outline: none;
+  padding: .5em;
+  width: 100%;
+
+  &::-webkit-input-placeholder {
+    color: $gray-light;
+  }
+
+  &::-moz-placeholder {
+    color: $gray-light;
+  }
+
+  &:-ms-input-placeholder {
+    color: $gray-light;
+  }
+
+  &:-moz-placeholder {
+    color: $gray-light;
+  }
+}
+
 .Emoji-grid__list {
   display: flex;
   flex-wrap: wrap;
