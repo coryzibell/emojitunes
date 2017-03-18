@@ -1,3 +1,4 @@
+import request from 'superagent'
 import emojis from 'node-emoji/lib/emoji.json'
 
 export default class Search {
@@ -37,5 +38,10 @@ export default class Search {
 
   getRecommendations(emoji) {
     console.log(emoji)
+    request
+     .get(`http://localhost:9000/recommendations/${emoji}`)
+     .end(function(err, res){
+       console.log(res)
+     })
   }
 }
