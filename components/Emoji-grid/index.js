@@ -12,12 +12,6 @@ export default class Search {
     this.container.appendChild(this.list)
 
     this.search.addEventListener('keyup', e => this.filterEmojis(e))
-
-    document.body.addEventListener('keydown', e => {
-      if (e.keyCode === 13) {
-        console.log(e)
-      }
-    })
   }
 
   addEmojiNode(emoji) {
@@ -26,7 +20,7 @@ export default class Search {
     child.classList.add('Emoji-grid__item')
     child.setAttribute('data-emoji', emojiName)
     child.innerHTML = emojiCode
-    child.addEventListener('click', e => this.triggerEmoji(e.currentTarget))
+    child.addEventListener('click', e => this.getRecommendations(e.currentTarget.innerHTML))
 
     this.list.appendChild(child)
   }
@@ -39,10 +33,6 @@ export default class Search {
         item.classList.remove('Emoji-grid__item--hide')
       }
     })
-  }
-
-  triggerEmoji(emojiNode) {
-    this.getRecommendations(emojiNode.innerHTML)
   }
 
   getRecommendations(emoji) {
