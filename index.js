@@ -1,5 +1,6 @@
 // require http, routing modules
 const http = require('http')
+const ecstatic = require('ecstatic')(__dirname + '/public')
 const routes = require('patterns')()
 
 // require spotify and initialise Spotify
@@ -121,13 +122,14 @@ const server = http.createServer((req, res) => {
     req.params = match.params
     fn(req, res)
   } else {
-    res.end('404')
+    ecstatic(req, res)
+    // res.end('404')
   }
 })
 
 // listen for http request on port 9000
-server.listen(9000, () => {
-  console.log('🤘 Server is running on http://localhost:9000 🤘')
+server.listen(8080, () => {
+  console.log('🤘 Server is running 🤘')
 })
 
 // find genres matching emoji and fetch recommendations from Spotify
