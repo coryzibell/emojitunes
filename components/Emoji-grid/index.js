@@ -3,14 +3,17 @@ import emojis from 'node-emoji/lib/emoji.json'
 
 export default class Search {
   constructor(opts) {
-    this.container = document.querySelector(opts.container)
+    this.step1 = document.querySelector(opts.step1)
+    this.step2 = document.querySelector(opts.step2)
+    this.grid = document.querySelector(opts.grid)
+    this.reccos = document.querySelector(opts.reccos)
     this.search = document.querySelector(opts.search)
     this.list = document.createElement('ul')
 
     Object.entries(emojis).map((emoji, i) => this.addEmojiNode(emoji, i))
 
     this.list.classList.add('Emoji-grid__list')
-    this.container.appendChild(this.list)
+    this.grid.appendChild(this.list)
 
     this.search.addEventListener('keyup', e => this.filterEmojis(e))
     document.addEventListener('keydown', e => this.keyboardNav(e))
@@ -43,11 +46,14 @@ export default class Search {
   }
 
   getRecommendations(emoji) {
+    this.step1.style.opacity = 0
+
     request
       .get(`/recommendations/${emoji}`)
       .set('Accept', 'application/json')
       .end((err, res) => {
         if (err) {
+          this.step1.style.opacity = 1
           console.log('Error getting recommendations', err)
           return
         }
@@ -55,6 +61,7 @@ export default class Search {
         const json = JSON.parse(res.text)
 
         if (json.error) {
+          this.step1.style.opacity = 1
           console.log(json.error)
           return
         }
@@ -64,10 +71,17 @@ export default class Search {
   }
 
   showRecommendations(tracks) {
-    this.container.innerHTML = ''
+    this.reccos.innerHTML = ''
+
+    setTimeout(() => {
+      this.step1.style.display = 'none'
+      this.step2.style.display = 'block'
+      this.step2.style.opacity = 1
+    }, 350)
+
     tracks.forEach(track => {
       const trackContainer = document.createElement('div')
-      trackContainer.style.display = 'inline'
+      trackContainer.classList.add('Recommendations__item')
       const iframe = `
         <iframe src="https://embed.spotify.com/?uri=${track.url}"
             width="300"
@@ -78,7 +92,7 @@ export default class Search {
         </iframe>
       `
       trackContainer.innerHTML = iframe
-      this.container.appendChild(trackContainer)
+      this.reccos.appendChild(trackContainer)
     })
   }
 
@@ -103,7 +117,7 @@ export default class Search {
         }
 
         Array.prototype.slice
-        .call(this.container.querySelectorAll('[data-visible="true"]'))
+        .call(this.grid.querySelectorAll('[data-visible="true"]'))
         .reverse()
         .every(item => {
           console.log(item, activeIndex)
@@ -128,7 +142,7 @@ export default class Search {
       e.preventDefault()
 
       Array.prototype.slice
-      .call(this.container.querySelectorAll('[data-visible="true"]'))
+      .call(this.grid.querySelectorAll('[data-visible="true"]'))
       .every(item => {
         console.log(item, activeIndex)
         if (Number(item.getAttribute('data-index')) > activeIndex) {

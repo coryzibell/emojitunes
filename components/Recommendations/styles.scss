@@ -1,0 +1,11 @@
+.Recommendations {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.25em;
+  width: 100%;
+}
+
+.Recommendations__item {
+  padding: .625em;
+}

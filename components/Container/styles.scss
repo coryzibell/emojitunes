@@ -12,3 +12,19 @@
   height: 100%;
   padding: 1.25em;
 }
+
+.Container__intro,
+.Container__reccos {
+  transition: .3s;
+  width: 100%;
+}
+
+.Container__intro {
+  display: block;
+  opacity: 1;
+}
+
+.Container__reccos {
+  display: none;
+  opacity: 0;
+}

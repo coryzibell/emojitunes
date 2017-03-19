@@ -6,6 +6,9 @@ import 'babel-polyfill'
 import EmojiGrid from '../components/Emoji-grid'
 
 new EmojiGrid({
-  container: '[data-emoji-grid]',
+  step1: '[data-step="1"]',
+  step2: '[data-step="2"]',
+  grid: '[data-emoji-grid]',
+  reccos: '[data-reccos]',
   search: '[data-search]'
 })
