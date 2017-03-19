@@ -1,0 +1,58 @@
+.Slack {
+  color: #2c2d30;
+  display: flex;
+  text-align: left;
+}
+
+.Slack__row {
+  align-self: flex-start;
+  background: $white;
+  border-radius: 4px;
+  display: flex;
+  flex: 1 auto;
+  margin: 1em;
+  max-height: 180px;
+  padding: .8em 1em;
+  width: 100%;
+}
+
+.Slack__avatar {
+  align-items: center;
+  border-radius: 2px;
+  display: flex;
+  font-size: 40px;
+  height: 45px;
+  justify-content: center;
+  width: 45px;
+}
+
+.Slack__msg {
+  padding-left: .625em;
+}
+
+.Slack__header {
+  align-items: center;
+  display: flex;
+}
+
+.Slack__name {
+  font-size: .7em;
+  font-weight: bold;
+  margin: 0;
+  text-transform: none;
+}
+
+.Slack__time {
+  font-size: .6em;
+  margin-left: 1em;
+}
+
+.Slack__body {
+  font-size: .7em;
+  margin: 0;
+}
+
+.Slack__spotify {
+  margin-top: .625em;
+  width: 100%;
+}

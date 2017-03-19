@@ -7,9 +7,9 @@
     "api": "node index.js",
     "webpack:dev": "eslint **/*.js &&  SITE=$site webpack --colors --watch",
     "webpack:prod": "eslint **/*.js &&  NODE_ENV=production webpack --config ./webpack.config.prod.babel.js --colors",
-    "prestart": "npm run webpack:prod",
-    "start": "ecstatic --root public --cache 0 --port 8080",
-    "dev": "concurrently --kill-others 'ecstatic --root public --cache 0 --port 8080' 'npm run webpack:dev'"
+    "start": "npm run api & ecstatic --root public --cache 0 --port 8080",
+    "dev": "concurrently --kill-others 'ecstatic --root public --cache 0 --port 8080' 'npm run webpack:dev'",
+    "build": "npm run webpack:prod"
   },
   "author": "Adam Chambers, @chambaz",
   "license": "MIT",
