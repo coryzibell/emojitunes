@@ -7,20 +7,24 @@ export default class Search {
     this.search = document.querySelector(opts.search)
     this.list = document.createElement('ul')
 
-    Object.entries(emojis).map(emoji => this.addEmojiNode(emoji))
+    Object.entries(emojis).map((emoji, i) => this.addEmojiNode(emoji, i))
 
     this.list.classList.add('Emoji-grid__list')
     this.container.appendChild(this.list)
 
     this.search.addEventListener('keyup', e => this.filterEmojis(e))
+    document.addEventListener('keydown', e => this.keyboardNav(e))
   }
 
-  addEmojiNode(emoji) {
+  addEmojiNode(emoji, i) {
     const child = document.createElement('li')
     let [emojiName, emojiCode] = emoji
     child.classList.add('Emoji-grid__item')
     child.setAttribute('data-emoji', emojiName)
+    child.setAttribute('data-index', i)
+    child.setAttribute('data-visible', 'true')
     child.innerHTML = emojiCode
+    child.tabIndex = 0
     child.addEventListener('click', e => this.getRecommendations(e.currentTarget.innerHTML))
 
     this.list.appendChild(child)
@@ -30,8 +34,10 @@ export default class Search {
     this.list.querySelectorAll('[data-emoji]').forEach(item => {
       if (!item.getAttribute('data-emoji').includes(e.currentTarget.value)) {
         item.classList.add('Emoji-grid__item--hide')
+        item.setAttribute('data-visible', 'false')
       } else {
         item.classList.remove('Emoji-grid__item--hide')
+        item.setAttribute('data-visible', 'true')
       }
     })
   }
@@ -75,5 +81,72 @@ export default class Search {
       trackContainer.innerHTML = iframe
       this.container.appendChild(trackContainer)
     })
+  }
+
+  keyboardNav(e) {
+    const active = document.activeElement
+    const activeIndex = active.hasAttribute('data-index') ?
+                        Number(active.getAttribute('data-index')) : -1
+
+    switch (e.keyCode) {
+    case 37:
+    case 38:
+      e.preventDefault()
+      if (activeIndex === 0) {
+        this.search.focus()
+      } else {
+        const quickPrev = this.list.querySelector(`[data-index="${activeIndex - 1}"`)
+        let slowPrev = false
+
+        if (quickPrev.getAttribute('data-visible') === 'true') {
+          quickPrev.focus()
+          return
+        }
+
+        Array.prototype.slice
+        .call(this.container.querySelectorAll('[data-visible="true"]'))
+        .reverse()
+        .every(item => {
+          console.log(item, activeIndex)
+          if (Number(item.getAttribute('data-index')) < activeIndex) {
+            item.focus()
+            slowPrev = true
+            return false
+          }
+
+          return true
+        })
+
+        if (!slowPrev) {
+          this.search.focus()
+        }
+      }
+
+      break
+
+    case 39:
+    case 40:
+      e.preventDefault()
+
+      Array.prototype.slice
+      .call(this.container.querySelectorAll('[data-visible="true"]'))
+      .every(item => {
+        console.log(item, activeIndex)
+        if (Number(item.getAttribute('data-index')) > activeIndex) {
+          item.focus()
+          return false
+        }
+
+        return true
+      })
+
+      break
+
+    case 13:
+      if (active.hasAttribute('data-emoji')) {
+        this.getRecommendations(active.innerHTML)
+      }
+      break
+    }
   }
 }
