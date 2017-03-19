@@ -44,7 +44,7 @@ export default class Search {
 
   getRecommendations(emoji) {
     request
-      .get(`${window.location.protocol}//${window.location.hostname}:9000/recommendations/${emoji}`)
+      .get(`/recommendations/${emoji}`)
       .set('Accept', 'application/json')
       .end((err, res) => {
         if (err) {

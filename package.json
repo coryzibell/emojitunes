@@ -4,11 +4,10 @@
   "description": "Get Spotify recommendations from emojis",
   "main": "index.js",
   "scripts": {
-    "api": "node index.js",
     "webpack:dev": "eslint **/*.js &&  SITE=$site webpack --colors --watch",
     "webpack:prod": "eslint **/*.js &&  NODE_ENV=production webpack --config ./webpack.config.prod.babel.js --colors",
     "start": "node index.js",
-    "dev": "concurrently --kill-others 'ecstatic --root public --cache 0 --port 8080' 'npm run webpack:dev'",
+    "dev": "concurrently --kill-others 'npm start' 'npm run webpack:dev'",
     "build": "npm run webpack:prod"
   },
   "author": "Adam Chambers, @chambaz",
