@@ -1,6 +1,7 @@
 .Slack {
   color: #2c2d30;
   display: flex;
+  font-weight: 400;
   text-align: left;
 }
 
@@ -37,7 +38,7 @@
 
 .Slack__name {
   font-size: .7em;
-  font-weight: bold;
+  font-weight: 600;
   margin: 0;
   text-transform: none;
 }
