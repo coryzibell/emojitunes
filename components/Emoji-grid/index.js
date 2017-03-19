@@ -47,7 +47,14 @@ export default class Search {
           return
         }
 
-        this.showRecommendations(JSON.parse(res.text).tracks)
+        const json = JSON.parse(res.text)
+
+        if (json.error) {
+          console.log(json.error)
+          return
+        }
+
+        this.showRecommendations(json.tracks)
       })
   }
 
