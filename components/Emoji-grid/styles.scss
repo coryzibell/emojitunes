@@ -1,10 +1,13 @@
 .Emoji-grid {
-  overflow: auto;
   width: 100%;
 }
 
 .Emoji-grid__form {
-  margin: 1em 0;
+  background: rgba(18, 18, 18, .7);
+  margin: 0;
+  padding: 1em 0;
+  position: sticky;
+  top: 0;
   width: 100%;
 }
 

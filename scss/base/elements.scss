@@ -2,12 +2,8 @@
   box-sizing: border-box;
 }
 
-body,
-html {
-  height: 100%;
-}
-
 body {
+  background: $black;
   font-family: $base-font-family;
   font-weight: 100;
   line-height: 1.6;
