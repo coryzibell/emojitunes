@@ -9,23 +9,24 @@
 }
 
 .Emoji-grid__search {
-  border: solid 1px $gray-light;
-  color: $black;
+  background: lighten($black, 3%);
+  border: solid 1px lighten($black, 7%);
+  color: $gray-light;
   font-size: 2em;
   outline: none;
   padding: .5em;
   width: 100%;
 
   &::-webkit-input-placeholder {
-    color: $gray-light;
+    color: $gray-dark;
   }
 
   &::-moz-placeholder {
-    color: $gray-light;
+    color: $gray-dark;
   }
 
   &:-ms-input-placeholder {
-    color: $gray-light;
+    color: $gray-dark;
   }
 
   &:-moz-placeholder {
