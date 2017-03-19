@@ -10,5 +10,6 @@ new EmojiGrid({
   step2: '[data-step="2"]',
   grid: '[data-emoji-grid]',
   reccos: '[data-reccos]',
-  search: '[data-search]'
+  search: '[data-search]',
+  restart: '[data-restart]'
 })

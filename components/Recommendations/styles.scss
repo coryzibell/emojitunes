@@ -1,4 +1,19 @@
-.Recommendations {
+.Recommendations__restart {
+  border-bottom: solid 1px $white;
+  color: $white;
+  cursor: pointer;
+  font-size: 1.2em;
+  padding-bottom: 5px;
+}
+
+.Recommendations__loading {
+  font-size: 40px;
+  margin-top: calc(45vh - 3em);
+  text-transform: uppercase;
+  color: lighten($black, 10%);
+}
+
+.Recommendations__grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

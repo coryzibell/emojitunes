@@ -8,6 +8,7 @@ export default class Search {
     this.grid = document.querySelector(opts.grid)
     this.reccos = document.querySelector(opts.reccos)
     this.search = document.querySelector(opts.search)
+    this.restart = document.querySelector(opts.restart)
     this.list = document.createElement('ul')
 
     Object.entries(emojis).map((emoji, i) => this.addEmojiNode(emoji, i))
@@ -15,6 +16,7 @@ export default class Search {
     this.list.classList.add('Emoji-grid__list')
     this.grid.appendChild(this.list)
 
+    this.restart.addEventListener('click', () => this.reset())
     this.search.addEventListener('keyup', e => this.filterEmojis(e))
     document.addEventListener('keydown', e => this.keyboardNav(e))
   }
@@ -46,7 +48,13 @@ export default class Search {
   }
 
   getRecommendations(emoji) {
+    this.reccos.innerHTML = '<p class="Recommendations__loading">Fetching tunes...</p>'
     this.step1.style.opacity = 0
+    setTimeout(() => {
+      this.step1.style.display = 'none'
+      this.step2.style.display = 'block'
+      this.step2.style.opacity = 1
+    }, 350)
 
     request
       .get(`/recommendations/${emoji}`)
@@ -72,13 +80,6 @@ export default class Search {
 
   showRecommendations(tracks) {
     this.reccos.innerHTML = ''
-
-    setTimeout(() => {
-      this.step1.style.display = 'none'
-      this.step2.style.display = 'block'
-      this.step2.style.opacity = 1
-    }, 350)
-
     tracks.forEach(track => {
       const trackContainer = document.createElement('div')
       trackContainer.classList.add('Recommendations__item')
@@ -94,6 +95,19 @@ export default class Search {
       trackContainer.innerHTML = iframe
       this.reccos.appendChild(trackContainer)
     })
+  }
+
+  reset() {
+    this.step2.style.opacity = 0
+
+    setTimeout(() => {
+      this.step2.style.display = 'none'
+      this.step1.style.display = 'block'
+
+      setTimeout(() => {
+        this.step1.style.opacity = 1
+      }, 50)
+    }, 350)
   }
 
   keyboardNav(e) {
