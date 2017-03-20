@@ -82,18 +82,21 @@
   animation: show-msg-first;
   animation-duration: .5s;
   animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(.75, -.5, 0, 1.75);
 }
 
 .Slack__row--first-animate-2 {
   animation: show-msg-first-2;
   animation-duration: .5s;
   animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(.75, -.5, 0, 1.75);
 }
 
 .Slack__row--second-animate {
   animation: show-msg-second;
   animation-duration: .5s;
   animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(.75, -.5, 0, 1.75);
 }
 
 .Slack__avatar {

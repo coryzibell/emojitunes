@@ -7,7 +7,7 @@ export default class Slack {
   startConversation() {
     setTimeout(() => {
       this.msgs[0].classList.add('Slack__row--first-animate')
-    }, 3000)
+    }, 4000)
 
     setTimeout(() => {
       this.msgs[0].classList.add('Slack__row--first-animate-2')
