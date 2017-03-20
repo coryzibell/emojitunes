@@ -12,30 +12,6 @@ export default class Slack {
     this.animate()
   }
 
-  animate() {
-    const emoji = this.randomEmoji()
-
-    setTimeout(() => {
-      this.msgs[0].classList.add('Slack__row--first-animate')
-      setTimeout(() => {
-        this.typeMsg(this.msgs[0].querySelector('[data-msg]'), emoji)
-        setTimeout(() => {
-          this.msgs[0].classList.add('Slack__row--first-animate-2')
-          setTimeout(() => {
-            this.msgs[1].classList.add('Slack__row--second-animate')
-            setTimeout(() => {
-              this.typeMsg(this.msgs[1].querySelector('[data-msg]'), '👊')
-              setTimeout(() => this.addRecommendation(
-                this.msgs[1].querySelector('[data-msg]'),
-                emoji
-              ), 1000)
-            }, 500)
-          }, 1000)
-        }, 1500)
-      }, 500)
-    }, 1500)
-  }
-
   typeMsg(msg, emoji) {
     const letters = `
       <span class="Slow__msg-part">
@@ -89,5 +65,28 @@ export default class Slack {
 
   randomEmoji() {
     return this.emojis[Math.floor(Math.random() * this.emojis.length)]
+  }
+
+  animate() {
+    const emoji = this.randomEmoji()
+    setTimeout(() => {
+      this.msgs[0].classList.add('Slack__row--first-animate')
+      setTimeout(() => {
+        this.typeMsg(this.msgs[0].querySelector('[data-msg]'), emoji)
+        setTimeout(() => {
+          this.msgs[0].classList.add('Slack__row--first-animate-2')
+          setTimeout(() => {
+            this.msgs[1].classList.add('Slack__row--second-animate')
+            setTimeout(() => {
+              this.typeMsg(this.msgs[1].querySelector('[data-msg]'), '👊')
+              setTimeout(() => this.addRecommendation(
+                this.msgs[1].querySelector('[data-msg]'),
+                emoji
+              ), 1000)
+            }, 500)
+          }, 1000)
+        }, 1500)
+      }, 500)
+    }, 1500)
   }
 }
