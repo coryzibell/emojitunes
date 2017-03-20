@@ -21,7 +21,7 @@ export default class Slack {
       setTimeout(() => {
         this.typeMsg(this.msgs[0].querySelector('[data-msg]'), emoji)
       }, 500)
-    }, 4000)
+    }, 2000)
 
     setTimeout(() => {
       this.msgs[0].classList.add('Slack__row--first-animate-2')
@@ -36,7 +36,7 @@ export default class Slack {
           ), 1000)
         }, 500)
       }, 1000)
-    }, 6000)
+    }, 3000)
   }
 
   typeMsg(msg, emoji) {
