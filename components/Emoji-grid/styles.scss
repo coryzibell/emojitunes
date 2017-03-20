@@ -5,9 +5,9 @@
 .Emoji-grid__form {
   background: rgba(18, 18, 18, .7);
   margin: 0;
+  margin-bottom: 1em;
   padding: 1em 0 0;
   position: sticky;
-  margin-bottom: 1em;
   top: 0;
   width: 100%;
 }
@@ -53,7 +53,19 @@
   font-size: 1.5em;
   padding: .5em;
   text-align: center;
-  width: 4%;
+  width: 14%;
+
+  @media(min-width: $medium-screen) {
+    width: 10%;
+  }
+
+  @media(min-width: $large-screen) {
+    width: 8%;
+  }
+
+  @media(min-width: $max-width) {
+    width: 4%;
+  }
 }
 
 .Emoji-grid__item--hide {

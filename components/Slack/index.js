@@ -9,6 +9,10 @@ export default class Slack {
       '🙌'
     ]
 
+    if (window.matchMedia('(max-width: 47.9375em)').matches) {
+      return
+    }
+
     this.animate()
   }
 

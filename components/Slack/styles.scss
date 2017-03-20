@@ -48,11 +48,15 @@
 
 .Slack {
   color: #2c2d30;
-  display: block;
+  display: none;
   font-weight: 400;
   height: 13.75em;
   position: relative;
   text-align: left;
+
+  @media(min-width: $medium-screen) {
+    display: block;
+  }
 }
 
 .Slack__row {

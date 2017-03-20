@@ -1,9 +1,21 @@
 .Body {
-  font-size: 1.3em;
+  font-size: 1em;
   line-height: 1.8;
   margin: 0 auto 1.5em;
   max-width: 45em;
   width: 100%;
+
+  @media(min-width: $medium-screen) {
+    font-size: 1.3em;
+  }
+}
+
+.Body__break {
+  display: none;
+
+  @media(min-width: $medium-screen) {
+    display: block;
+  }
 }
 
 .Body__slack-btn {

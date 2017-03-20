@@ -2,15 +2,17 @@
   border-bottom: solid 1px $white;
   color: $white;
   cursor: pointer;
+  display: inline-block;
   font-size: 1.2em;
+  margin-top: 1.25em;
   padding-bottom: 5px;
 }
 
 .Recommendations__loading {
+  color: lighten($black, 10%);
   font-size: 40px;
   margin-top: calc(45vh - 3em);
   text-transform: uppercase;
-  color: lighten($black, 10%);
 }
 
 .Recommendations__grid {
