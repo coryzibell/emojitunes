@@ -9,21 +9,18 @@ export default class Slack {
       '🙌'
     ]
 
-    this.startConversation()
+    this.animate()
   }
 
-  startConversation() {
+  animate() {
     const emoji = this.randomEmoji()
 
     setTimeout(() => {
       this.msgs[0].classList.add('Slack__row--first-animate')
-
       setTimeout(() => {
         this.typeMsg(this.msgs[0].querySelector('[data-msg]'), emoji)
-
         setTimeout(() => {
           this.msgs[0].classList.add('Slack__row--first-animate-2')
-
           setTimeout(() => {
             this.msgs[1].classList.add('Slack__row--second-animate')
             setTimeout(() => {
