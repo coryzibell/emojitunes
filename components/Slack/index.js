@@ -3,15 +3,23 @@ import request from 'superagent'
 export default class Slack {
   constructor(opts) {
     this.msgs = document.querySelectorAll(opts.msgs)
+    this.emojis = [
+      '🤘',
+      '🎸',
+      '🙌'
+    ]
+
     this.startConversation()
   }
 
   startConversation() {
+    const emoji = this.randomEmoji()
+
     setTimeout(() => {
       this.msgs[0].classList.add('Slack__row--first-animate')
 
       setTimeout(() => {
-        this.typeMsg(this.msgs[0].querySelector('[data-msg]'), '🤘')
+        this.typeMsg(this.msgs[0].querySelector('[data-msg]'), emoji)
       }, 500)
     }, 4000)
 
@@ -24,7 +32,7 @@ export default class Slack {
           this.typeMsg(this.msgs[1].querySelector('[data-msg]'), '👊')
           setTimeout(() => this.addRecommendation(
             this.msgs[1].querySelector('[data-msg]'),
-            '🤘'
+            emoji
           ), 1000)
         }, 500)
       }, 1000)
@@ -80,5 +88,9 @@ export default class Slack {
         container.innerHTML = html
         msg.parentNode.appendChild(container)
       })
+  }
+
+  randomEmoji() {
+    return this.emojis[Math.floor(Math.random() * this.emojis.length)]
   }
 }
