@@ -20,23 +20,23 @@ export default class Slack {
 
       setTimeout(() => {
         this.typeMsg(this.msgs[0].querySelector('[data-msg]'), emoji)
-      }, 500)
-    }, 2000)
 
-    setTimeout(() => {
-      this.msgs[0].classList.add('Slack__row--first-animate-2')
-
-      setTimeout(() => {
-        this.msgs[1].classList.add('Slack__row--second-animate')
         setTimeout(() => {
-          this.typeMsg(this.msgs[1].querySelector('[data-msg]'), '👊')
-          setTimeout(() => this.addRecommendation(
-            this.msgs[1].querySelector('[data-msg]'),
-            emoji
-          ), 1000)
-        }, 500)
-      }, 1000)
-    }, 3000)
+          this.msgs[0].classList.add('Slack__row--first-animate-2')
+
+          setTimeout(() => {
+            this.msgs[1].classList.add('Slack__row--second-animate')
+            setTimeout(() => {
+              this.typeMsg(this.msgs[1].querySelector('[data-msg]'), '👊')
+              setTimeout(() => this.addRecommendation(
+                this.msgs[1].querySelector('[data-msg]'),
+                emoji
+              ), 1000)
+            }, 500)
+          }, 1000)
+        }, 1500)
+      }, 500)
+    }, 1500)
   }
 
   typeMsg(msg, emoji) {
