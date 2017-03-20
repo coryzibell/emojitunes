@@ -1,3 +1,5 @@
+import request from 'superagent'
+
 export default class Slack {
   constructor(opts) {
     this.msgs = document.querySelectorAll(opts.msgs)
@@ -20,7 +22,10 @@ export default class Slack {
         this.msgs[1].classList.add('Slack__row--second-animate')
         setTimeout(() => {
           this.typeMsg(this.msgs[1].querySelector('[data-msg]'), '👊')
-          setTimeout(() => this.addIframe(this.msgs[1].querySelector('[data-msg]')), 1000)
+          setTimeout(() => this.addRecommendation(
+            this.msgs[1].querySelector('[data-msg]'),
+            '🤘'
+          ), 1000)
         }, 500)
       }, 1000)
     }, 6000)
@@ -44,21 +49,36 @@ export default class Slack {
     })
   }
 
-  addIframe(msg) {
-    const container = document.createElement('div')
-    const html = `
-      <iframe
-        class="Slack__spotify"
-        src="https://embed.spotify.com/?uri=https://open.spotify.com/track/2SgbR6ttzoNlCRGQOKjrop"
-        width="150"
-        height="190"
-        frameborder="0"
-        style="border: 0;"
-        allowtransparency="true">
-      </iframe>
-    `
+  addRecommendation(msg, emoji) {
+    request
+      .get(`/recommendations/${emoji}`)
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        if (err) {
+          console.log('Error getting recommendations', err)
+          return
+        }
 
-    container.innerHTML = html
-    msg.parentNode.appendChild(container)
+        const json = JSON.parse(res.text)
+
+        if (json.error) {
+          console.log(json.error)
+          return
+        }
+
+        const container = document.createElement('div')
+        const html = `
+          <iframe class="Slack__spotify" src="https://embed.spotify.com/?uri=${json.tracks[0].url}"
+              width="300"
+              height="190"
+              frameborder="0"
+              style="border: 0;"
+              allowtransparency="true">
+          </iframe>
+        `
+
+        container.innerHTML = html
+        msg.parentNode.appendChild(container)
+      })
   }
 }

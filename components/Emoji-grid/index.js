@@ -86,7 +86,7 @@ export default class Search {
       const iframe = `
         <iframe src="https://embed.spotify.com/?uri=${track.url}"
             width="300"
-            height="380
+            height="380"
             frameborder="0"
             style="border: 0;"
             allowtransparency="true">
