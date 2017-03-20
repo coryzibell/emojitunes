@@ -132,6 +132,12 @@
 .Slack__body {
   font-size: .7em;
   margin: 0;
+  opacity: 0;
+}
+
+.Slow__msg-part {
+  opacity: 0;
+  transition: .15s;
 }
 
 .Slack__spotify {
