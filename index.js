@@ -32,7 +32,7 @@ spotifyApi.clientCredentialsGrant().then(data => {
 // get recommendations API route
 // @params emoji e.g 🤘
 // @return JSON object containing genre and track arrays
-routes.add('GET /recommendations/{emoji}', (req, res) => {
+routes.add('GET /api/recommendations/{emoji}', (req, res) => {
   res.setHeader('Content-Type', 'application/json')
 
   const decodedEmojiParam = decodeURIComponent(req.params.emoji)
@@ -58,7 +58,7 @@ routes.add('GET /recommendations/{emoji}', (req, res) => {
 })
 
 // get recommendations and return grid of Spotify play button iframes
-routes.add('GET /recommendations-browser/{emoji}', (req, res) => {
+routes.add('GET /api/recommendations-browser/{emoji}', (req, res) => {
   res.setHeader('Content-Type', 'text/html')
 
   const decodedEmojiParam = decodeURIComponent(req.params.emoji)

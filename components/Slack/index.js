@@ -36,7 +36,7 @@ export default class Slack {
 
   addRecommendation(msg, emoji) {
     request
-      .get(`/recommendations/${emoji}`)
+      .get(`/api/recommendations/${emoji}`)
       .set('Accept', 'application/json')
       .end((err, res) => {
         if (err) {
