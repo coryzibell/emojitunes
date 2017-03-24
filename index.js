@@ -34,6 +34,7 @@ spotifyApi.clientCredentialsGrant().then(data => {
 // @return JSON object containing genre and track arrays
 routes.add('GET /api/recommendations/{emoji}', (req, res) => {
   res.setHeader('Content-Type', 'application/json')
+  res.setHeader('Access-Control-Allow-Origin', '*')
 
   const decodedEmojiParam = decodeURIComponent(req.params.emoji)
   let foundEmoji = false
