@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8' />
+  <meta name='viewport' content='width=device-width, minimum-scale=1.0' />
+
+  <title>EmojiTunes</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet" />
+  <link rel='stylesheet' href='dist/style.css' />
+
+  <meta name='description' content='xxx' />
+  <meta name='author' content='xxx' />
+
+  <meta property='og:url' content='xxx' />
+  <meta property='fb:page_id' content='xxx' />
+  <meta property='og:title' content='xxx' />
+  <meta property='og:description' content='xxx' />
+  <meta property='og:image' content='xxx' />
+
+  <meta itemprop='name' content='xxx' />
+  <meta itemprop='description' content='xxx' />
+  <meta itemprop='image' content='xxx' />
+
+  <link rel='canonical' href='xxx' />
+
+  <meta name='twitter:card' content='xxx' />
+  <meta name='twitter:site' content='xxx' />
+  <meta name='twitter:site:id' content='xxx' />
+  <meta name='twitter:title' content='xxx' />
+  <meta name='twitter:description' content='xxx' />
+  <meta name='twitter:image' content='xxx' />
+
+  <link rel='apple-touch-icon' sizes='57x57' href='/apple-icon-57x57.png'>
+  <link rel='apple-touch-icon' sizes='60x60' href='/apple-icon-60x60.png'>
+  <link rel='apple-touch-icon' sizes='72x72' href='/apple-icon-72x72.png'>
+  <link rel='apple-touch-icon' sizes='76x76' href='/apple-icon-76x76.png'>
+  <link rel='apple-touch-icon' sizes='114x114' href='/apple-icon-114x114.png'>
+  <link rel='apple-touch-icon' sizes='120x120' href='/apple-icon-120x120.png'>
+  <link rel='apple-touch-icon' sizes='144x144' href='/apple-icon-144x144.png'>
+  <link rel='apple-touch-icon' sizes='152x152' href='/apple-icon-152x152.png'>
+  <link rel='apple-touch-icon' sizes='180x180' href='/apple-icon-180x180.png'>
+  <link rel='icon' type='image/png' sizes='192x192'  href='/android-icon-192x192.png'>
+  <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png'>
+  <link rel='icon' type='image/png' sizes='96x96' href='/favicon-96x96.png'>
+  <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png'>
+  <link rel='manifest' href='/manifest.json'>
+  <meta name='msapplication-TileColor' content='xxx'>
+  <meta name='msapplication-TileImage' content='xxx'>
+  <meta name='theme-color' content='xxx'>
+</head>
+<body>
+
+  <main class="Container">
+    <div class="Container__inner">
+      <header class="Header">
+        <h1 class="Header__title">
+          <span class="Header__emoji">😎</span>
+          Emojitunes
+          <span class="Header__emoji">😎</span>
+        </h1>
+      </header>
+
+      <div class="Container__intro" data-step="1">
+        <div class="Body">
+          <p class="Body__description">
+            🔥 Get Spotify recommendations from a simple emoji 🔥  <br class="Body__break" />
+            Install the Slack Bot 🤖 or pick an emoji from below 👇
+          </p>
+
+          <a
+            href="https://slack.com/oauth/authorize?scope=incoming-webhook,bot&client_id=2342865809.156539360116"
+            class="Body__slack-btn">
+            <img
+              alt="Add to Slack"
+              height="40"
+              width="139"
+              src="https://platform.slack-edge.com/img/add_to_slack.png"
+              srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"
+            />
+          </a>
+
+          <div class="Slack">
+            <div class="Slack__row Slack__row--first" data-slack-msg>
+              <img class="Slack__avatar" src="/img/avatar.jpg" />
+              <div class="Slack__msg">
+                <header class="Slack__header">
+                  <h3 class="Slack__name">Adam Chambers</h3>
+                  <time class="Slack__time">6:00 AM</time>
+                </header>
+                <p class="Slack__body" data-msg>Hey @emojitunes give me some</p>
+              </div>
+            </div>
+            <div class="Slack__row Slack__row--second" data-slack-msg>
+              <div class="Slack__avatar">
+                😎
+              </div>
+              <div class="Slack__msg">
+                <header class="Slack__header">
+                  <h3 class="Slack__name">emojitunes</h3>
+                  <time class="Slack__time">6:00 AM</time>
+                </header>
+                <p class="Slack__body" data-msg>You got it</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="Emoji-grid" data-emoji-grid>
+          <form class="Emoji-grid__form">
+            <input
+              class="Emoji-grid__search"
+              data-search
+              type="search"
+              placeholder="Search emojis..."
+              autofocus
+              />
+          </form>
+        </div>
+      </div>
+
+      <div class="Container__reccos" data-step="2">
+        <div class="Recommendations">
+          <a class="Recommendations__restart" data-restart>✋ Try a different emoji?</a>
+          <div class="Recommendations__grid" data-reccos>
+            <p class="Recommendations__loading">Fetching tunes...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src='/dist/vendor.js'></script>
+  <script src='/dist/bundle.js'></script>
+</body>
+</html>
