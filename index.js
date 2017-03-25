@@ -6,8 +6,8 @@ const routes = require('patterns')()
 // require spotify and initialise Spotify
 const SpotifyWebApi = require('spotify-web-api-node')
 const spotifyApi = new SpotifyWebApi({
-  clientId: '6c926cf5c6cd4f2ead716ce1b20d9ef7',
-  clientSecret: '36a13c94552449a79f856abfeabc0455'
+  clientId: 'process.env.SPOTIFY_CLIENT_ID',
+  clientSecret: 'process.env.SPOTIFY_CLIENT_SECRET'
 })
 
 const emoji = require('node-emoji')
